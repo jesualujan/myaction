@@ -1,11 +1,20 @@
+name: Node Continuous Integration
 on: push
 jobs:
-  first-job:
+  build-node:
+    name: Build and run Node Project
     runs-on: ubuntu-latest
     container: node:16
     steps:
       - run: node --version
+        name: Check Node Version
       - run: npm --version
+        name: Check NPM version
+# Esta acción se utiliza para que el flujo de trabajo pueda acceder al repositorio y 
+# verificar su contenido en el entorno de ejecución.
       - uses: actions/checkout@v4
+        name: actions/checkout@v4
       - run: npm install
+        name: Install NPM packages
       - run: node app.js
+        name: Run Node application
